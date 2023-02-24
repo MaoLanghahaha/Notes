@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件处理</title>
+</head>
+<body>
+   <!-- 容器 -->
+   <div id="test"></div>
+   <!-- 引入react核心库 -->
+   <script src="../../lib/react.development.js" crossorigin></script>
+   <!-- 引入react-dom 用于react操作DOM -->
+   <script src="../../lib/react-dom.development.js" crossorigin></script>
+   <!-- 引入babel 用于将jsx转化为js -->
+   <script src="../../lib/babel.min.js"></script>
+ 
+   <script type="text/babel">
+    /**
+     * 1、通过onXxx属性指定事件处理函数（注意大小写）
+     *    1.1 React使用的是自定义事件（合成事件），而不是使用的原生DOM事件————为了更好的兼容性
+     *    1.2 React中的事件是通过事件委托的方式来处理的（委托给组件最外层元素）————为了高效
+     * 2、通过event.target得到发生事件的DOM元素对象————不要过度使用ref
+    */
+     class Demo extends React.Component {
+       myRef1 = React.createRef()
+       render () {
+         return (
+           <div>
+             <input type="text" ref={this.myRef1}/>
+             <input type="button" value="点我" onClick={this.showData1}/>
+             <input type="text" onBlur={this.showData2}/>
+           </div>
+         )
+       }
+       showData1 = () => {
+         console.log(this.myRef1.current.value)
+       }
+       showData2 = (event) => {
+         console.log(event.target.value)
+       }
+     }
+     ReactDOM.render(<Demo />, document.getElementById('test'))
+   </script>
+</body>
+</html>

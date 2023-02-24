@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jsx小练习</title>
+</head>
+
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="../../lib/react.production.min.js" crossorigin></script>
+  <!-- 引入react-dom 用于react操作DOM -->
+  <script src="../../lib/react-dom.production.min.js" crossorigin></script>
+  <!-- 引入babel 用于将jsx转化为js -->
+  <script src="../../lib/babel.min.js"></script>
+
+  <script type="text/babel">
+    const data = ['Angular', 'React', 'Vue']
+    const obj = {name1: 'Angular', name2: 'React', name3: 'Vue'}
+    const VDOM = (
+      <div>
+        <h1>前端js框架列表</h1>
+        <ul>
+          {
+            data.map((item, index) => <li key={index}>{item}</li>)
+          }
+        </ul>
+      </div>
+    )
+    ReactDOM.render(VDOM, document.getElementById('test'))
+  </script>
+</body>
+
+</html>

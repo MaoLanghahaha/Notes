@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>createRef</title>
+</head>
+
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="../../../lib/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于react操作DOM -->
+  <script src="../../../lib/react-dom.development.js" crossorigin></script>
+  <!-- 引入babel 用于将jsx转化为js -->
+  <script src="../../../lib/babel.min.js"></script>
+
+  <script type="text/babel">
+    class Demo extends React.Component {
+      // React.createRef()返回一个容器，该容器可以存储被ref所标识的节点，该容器是“专人专用的”，目前React最推荐的一种方式
+      myRef = React.createRef()
+      myRef2 = React.createRef()
+      render () {
+        return (
+          <div>
+            <input type="text" ref={this.myRef}/>
+            <input type="button" ref={this.myRef2} value="点我" onClick={this.showData1}/>
+          </div>
+        )
+      }
+      showData1 = () => {
+        console.log(this.myRef.current.value)
+        console.log(this.myRef2.current.value)
+      }
+    }
+    // 回调ref中调用次数的问题
+    ReactDOM.render(<Demo />, document.getElementById('test'))
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>props</title>
+</head>
+
+<body>
+  <!-- 容器 -->
+  <div id="test1"></div>
+  <div id="test2"></div>
+  <div id="test3"></div>
+  <!-- 引入react核心库 -->
+  <script src="../../../lib/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于react操作DOM -->
+  <script src="../../../lib/react-dom.development.js" crossorigin></script>
+  <!-- 引入babel 用于将jsx转化为js -->
+  <script src="../../../lib/babel.min.js"></script>
+  <script type="text/babel">
+    class Person extends React.Component {
+      render () {
+        const {name, sex, age} = this.props
+        return (
+          <ul>
+            <li>姓名: {name}</li>
+            <li>性别: {sex}</li>
+            <li>年龄: {age}</li>
+          </ul>
+        )
+      }
+    }
+    ReactDOM.render(<Person name="Merry" sex="女" age="20"/>, document.getElementById('test1'))
+    const p = {name:'Merry', sex: '女', age: 15}
+    ReactDOM.render(<Person name={p.name} sex={p.sex} age={p.age}/>, document.getElementById('test2'))
+    ReactDOM.render(<Person {...p}/>, document.getElementById('test3')) // 语法糖（批量传递props、批量传递标签属性） 原生JS ...不能展开一个对象， 但babel+React后可以使用...展开一个对象，但仅仅适用于标签对象展开（并不是产生了对象的克隆）
+  </script>
+</body>
+
+</html>

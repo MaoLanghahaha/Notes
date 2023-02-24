@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高阶函数-函数柯里化</title>
+</head>
+
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="../../lib/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于react操作DOM -->
+  <script src="../../lib/react-dom.development.js" crossorigin></script>
+  <!-- 引入babel 用于将jsx转化为js -->
+  <script src="../../lib/babel.min.js"></script>
+
+  <script type="text/babel">
+    /**
+     * 函数的柯里化：通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式
+     * 高阶函数：如果一个函数满足以下两个规范中的任何一个，则该函数为高阶函数
+     * 1、若函数A，接受的参数是一个函数，那么A为高阶函数
+     * 2、若函数A，调用后的返回值依然是一个函数，那么A为高阶函数
+     * 常见的高阶函数：Promise()、setTimeout()、arr.map()
+     * */
+    class Login extends React.Component {
+      state = {account: "", password: ""}
+      render () {
+        return (
+          <form action="https://fanyi.baidu.com/" onSubmit={this.handleSubmit}>
+            用户：<input type="text" name="account" onChange={(e)=>this.handleFormData1('account', e)}/>
+            密码：<input type="password" name="password" onChange={this.handleFormData2('password')}/>
+            <input type="submit" value="登录" />
+          </form>
+        )
+      }
+      handleSubmit = (e) => {
+        alert(`你输入的用户名是：${this.state.account}，你输入的密码是：${this.state.password}`)
+        e.preventDefault()
+      }
+      handleFormData1 = (key, e) => { // 方式一：不用柯里化的实现
+        console.log(e.target.value)
+        this.setState({[key]:e.target.value})
+      }
+      handleFormData2 = (key) => { // 方式二：函数的柯里化的实现
+        return (e) => {
+          this.setState({[key]:e.target.value})
+        }
+      }
+    }
+    ReactDOM.render(<Login />, document.getElementById('test'))
+  </script>
+</body>
+
+</html>

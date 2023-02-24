@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>回调ref中回调执行次数的问题</title>
+</head>
+
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="../../../lib/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于react操作DOM -->
+  <script src="../../../lib/react-dom.development.js" crossorigin></script>
+  <!-- 引入babel 用于将jsx转化为js -->
+  <script src="../../../lib/babel.min.js"></script>
+
+  <script type="text/babel">
+    class Demo extends React.Component {
+      state = {isHot: true}
+      render () {
+        // 不推荐用字符串形式的ref：有效率问题
+        return (
+          <div>
+            <h2 onClick={this.changeWeather}> 今天天气真 {this.state.isHot? '炎热': '凉爽'}</h2>
+            {/*<input type="text" ref={currNode=>{this.input1 = currNode;console.log(currNode);}}/>*//*此写法(内联函数的方式定义)在有state更新的情况下会频繁调用回调函数*/} 
+            <input type="text" ref={this.saveRef}/>
+            <input type="button" ref="button" value="点我" onClick={this.showData1}/>
+          </div>
+        )
+      }
+      showData1 = () => {
+        console.log(this.input1.value)
+      }
+      changeWeather = () => {
+        this.setState({isHot: !this.state.isHot})
+      }
+      saveRef = (currNode) => { //  class 的绑定函数的方式则不会出现问题
+        this.input1 = currNode;
+        console.log(currNode);
+      }
+    }
+    // 回调ref中调用次数的问题
+    ReactDOM.render(<Demo />, document.getElementById('test'))
+  </script>
+</body>
+
+</html>

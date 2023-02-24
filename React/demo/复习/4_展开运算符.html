@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>展开运算符</title>
+</head>
+<body>
+  <script>
+    let arr1 = [1, 2, 3, 4, 5]
+    let arr2 = [6, 7, 8, 9, 10]
+    console.log(...arr1); // 展开数组
+    let arr3 = [...arr1, ...arr2] // 连接数组
+    console.log(...arr3);
+
+    function sum(...nums) {// 在函数中使用
+      return nums.reduce((preValue, currValue)=>{
+        return preValue + currValue
+      })
+    }
+    console.log(sum(1, 2, 3));
+
+    let person = {name:'Tom', age:18, d:{a: 1, b:{h:[1, 2, 3, 4]}}}
+    // console.log(...person); // 展开运算符不能展开对象
+    let person2 = {...person}
+    console.log(person2);
+
+    person2.name = 'zhangsan'
+    person2.d.a = 2
+    console.log(person);
+    console.log(person2); // 展开运算符使用的对象如果只是针对简单的一级基础数据，就是深拷贝; 展开运算符使用的对象内容包含二级或更多的复杂的数据，那就是浅拷贝；(JSON.parse(JSON.stringify(obj)))
+
+    let person3 = { // 合并属性
+      ...person,
+      name: 'Jack',
+      address: '地球'
+    }
+    console.log(person3);
+  </script>
+</body>
+</html>

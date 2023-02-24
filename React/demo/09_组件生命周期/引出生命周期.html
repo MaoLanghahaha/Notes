@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>引出生命周期</title>
+</head>
+
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="../../lib/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于react操作DOM -->
+  <script src="../../lib/react-dom.development.js" crossorigin></script>
+  <!-- 引入babel 用于将jsx转化为js -->
+  <script src="../../lib/babel.min.js"></script>
+
+  <script type="text/babel">
+    // 生命周期回调函数（生命周期钩子函数）（生命周期函数）（生命周期钩子）
+    class Lift extends React.Component {
+      state = {opacity: 1}
+      render () { // 初始化渲染调用 状态更新后调用
+        console.log(1, "render");
+        return (
+          <div>
+            <h2 style={{opacity: this.state.opacity}}>学不会React怎么办</h2>
+            <button onClick={this.death}>不活了</button>
+          </div>
+        )
+      }
+      componentDidMount() { // 组件挂载完毕后调用
+        console.log(2, "componentDidMount");
+        this.interval = setInterval(() => {
+          let {opacity} = this.state
+          opacity -= 0.1
+          if (opacity <= 0) opacity = 1
+          this.setState({opacity})
+        }, 200);
+      }
+      componentWillUnmount() {// 组件将要卸载前调用
+        console.log(3, "componentWillUnmount");
+        clearInterval(this.interval)
+      }
+      death = () => {
+        // clearInterval(this.interval)
+        ReactDOM.unmountComponentAtNode(document.getElementById('test')) // 卸载组件（unmount）
+      }
+    }
+    ReactDOM.render(<Lift />, document.getElementById('test')) // 挂载组件（mount）
+  </script>
+</body>
+
+</html>

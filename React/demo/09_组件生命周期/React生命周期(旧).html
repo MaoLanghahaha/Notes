@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React生命周期（旧）</title>
+</head>
+
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="../../lib/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于react操作DOM -->
+  <script src="../../lib/react-dom.development.js" crossorigin></script>
+  <!-- 引入babel 用于将jsx转化为js -->
+  <script src="../../lib/babel.min.js"></script>
+
+  <script type="text/babel">
+    class Count extends React.Component {
+      state = { count: 0 }
+      constructor(props) {
+        super(props)
+        this.state = { count: 0 }
+        console.log("Count constructor");
+      }
+      componentWillMount () {
+        console.log("Count componentWillMount");
+      }
+      render () {
+        console.log("Count render");
+        return (
+          <div>
+            <h2>当前求和为: {this.state.count}</h2>
+            <button onClick={this.add}>点我+1</button>
+            <button onClick={this.death}>卸载组件</button>
+            <button onClick={this.handleForceUpdate}>不更新state，强制更新组件</button>
+          </div>
+        )
+      }
+      componentDidMount () {
+        console.log("Count componentDidMount");
+      }
+      componentWillUnmount () {
+        console.log("Count componentWillUnmount");
+      }
+      shouldComponentUpdate () { // 是否更新组件（控制组件更新的阀门）
+        console.log("Count shouldComponentUpdate");
+        return true // 默认返回true：允许更新，继续执行下一步; 返回false：不允许更新，不继续执行
+      }
+      componentWillUpdate () {
+        console.log("Count componentWillUpdate");
+      }
+      componentDidUpdate () {
+        console.log("Count componentDidUpdate");
+      }
+      add = () => {
+        let { count } = this.state
+        count += 1
+        this.setState({ count })
+      }
+      death = () => {
+        ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+      }
+      handleForceUpdate = () => {
+        this.forceUpdate() // 不更新state，也能更新组件
+      }
+    }
+
+    class A extends React.Component {
+      state = {carName: "奔驰"}
+      render () {
+        console.log("A render");
+        return (
+          <div>
+            <div>A</div>
+            <button onClick={this.changeCar}>换车</button><br/><br/>
+            <B carName={this.state.carName}/>
+          </div>
+        )
+      }
+      changeCar = () => {
+        this.setState({carName: "奥拓"})
+      }
+    }
+    class B extends React.Component {
+      componentWillReceiveProps (props) { // 第一次接收props不执行
+        console.log("B componentWillReceiveProps", props);
+      }
+      shouldComponentUpdate () { 
+        console.log("B shouldComponentUpdate");
+        return true 
+      }
+      componentWillUpdate () {
+        console.log("B componentWillUpdate");
+      }
+      componentDidUpdate () {
+        console.log("B componentDidUpdate");
+      }
+      render () {
+        console.log("B render");
+        return (
+          <div>B 接受到车：{this.props.carName}</div>
+        )
+      }
+    }
+    ReactDOM.render(<A />, document.getElementById('test')) 
+  </script>
+</body>
+
+</html>

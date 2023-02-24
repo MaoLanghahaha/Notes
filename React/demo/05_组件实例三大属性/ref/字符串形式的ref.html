@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字符串形式的ref</title>
+</head>
+
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="../../../lib/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于react操作DOM -->
+  <script src="../../../lib/react-dom.development.js" crossorigin></script>
+  <!-- 引入babel 用于将jsx转化为js -->
+  <script src="../../../lib/babel.min.js"></script>
+
+  <script type="text/babel">
+    class Demo extends React.Component {
+      render () {
+        return (
+          <div>
+            <input type="text" ref="input1"/>
+            <input type="button" ref="button" value="点我" onClick={this.showData1}/>
+            <input type="text" ref="input2" onBlur={this.showData2}/>
+          </div>
+        )
+      }
+      showData1 = () => {
+        console.log(this.refs.input1.value)
+      }
+      showData2 = () => {
+        console.log(this.refs.input2.value)
+      }
+    }
+    ReactDOM.render(<Demo />, document.getElementById('test'))
+  </script>
+</body>
+
+</html>

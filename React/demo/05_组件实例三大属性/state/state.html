@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State</title>
+</head>
+
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="../../../lib/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于react操作DOM -->
+  <script src="../../../lib/react-dom.development.js" crossorigin></script>
+  <!-- 引入babel 用于将jsx转化为js -->
+  <script src="../../../lib/babel.min.js"></script>
+
+  <script type="text/babel">
+    class Weather extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {isHot: false};
+        // 解决switchState中this指向问题
+        this.newSwitchState = this.switchState.bind(this) // bind生成一个新的函数同时改变this指向:见复习bind
+      }
+      render () {
+        // console.log(this);
+        return (
+          <h2 onClick={this.newSwitchState}>今天天气真{this.state.isHot? '炎热': '凉爽'}</h2>
+        )
+      }
+      switchState(){ 
+        // 此写法 onClick={this.switchState} 将switchState做为onClick的回调给出去，当点击发生时直接执行switchState（且类中定义的方法已在局部开启了严格模式），不是通过组件实例对象去调用，所以this为undefined
+        // 解决方法1：onClick={()=> this.switchState()}
+        // 解决方法2：this.newSwitchState = this.switchState.bind(this) 手动改了newSwitchState中的this，直接调用也不怕
+        console.log(this);
+      }
+    }
+    // const w1 = new Weather();
+    // console.log(w1);
+    ReactDOM.render(<Weather/>, document.getElementById('test'))
+  </script>
+</body>
+
+</html>

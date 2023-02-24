@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>回调函数形式的ref</title>
+</head>
+
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="../../../lib/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于react操作DOM -->
+  <script src="../../../lib/react-dom.development.js" crossorigin></script>
+  <!-- 引入babel 用于将jsx转化为js -->
+  <script src="../../../lib/babel.min.js"></script>
+
+  <script type="text/babel">
+    class Demo extends React.Component {
+      render () {
+        // 不推荐用字符串形式的ref：有效率问题
+        return (
+          <div>
+            <input type="text" ref={currNode=>this.input1 = currNode}/>
+            <input type="button" ref="button" value="点我" onClick={this.showData1}/>
+            <input type="text" ref={currNode=>this.input2 = currNode} onBlur={this.showData2}/>
+          </div>
+        )
+      }
+      showData1 = () => {
+        console.log(this.input1.value)
+      }
+      showData2 = () => {
+        console.log(this.input2.value)
+      }
+    }
+    // 回调ref中调用次数的问题
+    ReactDOM.render(<Demo />, document.getElementById('test'))
+  </script>
+</body>
+
+</html>

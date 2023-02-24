@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React生命周期（新）</title>
+</head>
+
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+  <!-- 引入react-dom 用于react操作DOM -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.js"></script>
+  <!-- 引入babel 用于将jsx转化为js -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.20.15/babel.min.js"></script>
+
+  <script type="text/babel">
+    class Count extends React.Component {
+      state = { count: 0 }
+      constructor(props) {
+        super(props)
+        this.state = { count: 0 }
+        console.log("Count constructor");
+      }
+      static getDerivedStateFromProps (props, state) { //此方法适用于罕见的用例，即 state 的值在任何时候都取决于 props时时使用
+        console.log("Count getDerivedStateFromProps");
+        return null
+        // return {xx: bb} // 它应返回一个对象来更新 state，如果返回 null 则不更新任何内容。
+      }
+      getSnapshotBeforeUpdate (prevProps, prevState) {
+        console.log("Count getSnapshotBeforeUpdate");
+        return null // 应返回 snapshot 的值（或 null），snapshot值为任意值
+      }
+      // UNSAFE_componentWillMount () { // UNSAFE_componentWillMount
+      //   console.log("Count componentWillMount");
+      // }
+      render () {
+        console.log("Count render");
+        return (
+          <div>
+            <h2>当前求和为: {this.state.count}</h2>
+            <button onClick={this.add}>点我+1</button>
+            <button onClick={this.death}>卸载组件</button>
+            <button onClick={this.handleForceUpdate}>不更新state，强制更新组件</button>
+          </div>
+        )
+      }
+      componentDidMount () {
+        console.log("Count componentDidMount");
+      }
+      componentWillUnmount () {
+        console.log("Count componentWillUnmount");
+      }
+      shouldComponentUpdate () { 
+        console.log("Count shouldComponentUpdate");
+        return true 
+      }
+      // UNSAFE_componentWillUpdate () {  // UNSAFE_componentWillUpdate
+      //   console.log("Count componentWillUpdate");
+      // }
+      componentDidUpdate (prevProps, prevState, snapshot) { // 这里的 snapshot 是 getSnapshotBeforeUpdate 的返回值：在更新之前获取快照
+        console.log("Count componentDidUpdate");
+      }
+      add = () => {
+        let { count } = this.state
+        count += 1
+        this.setState({ count })
+      }
+      death = () => {
+        ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+      }
+      handleForceUpdate = () => {
+        this.forceUpdate() 
+      }
+    }
+
+    class A extends React.Component {
+      state = {carName: "奔驰"}
+      render () {
+        console.log("A render");
+        return (
+          <div>
+            <div>A</div>
+            <button onClick={this.changeCar}>换车</button><br/><br/>
+            <B carName={this.state.carName}/>
+          </div>
+        )
+      }
+      changeCar = () => {
+        this.setState({carName: "奥拓"})
+      }
+    }
+    class B extends React.Component {
+      UNSAFE_componentWillReceiveProps (props) { // UNSAFE_componentWillReceiveProps
+        console.log("B componentWillReceiveProps", props);
+      }
+      shouldComponentUpdate () { 
+        console.log("B shouldComponentUpdate");
+        return true 
+      }
+      UNSAFE_componentWillUpdate () {
+        console.log("B componentWillUpdate");
+      }
+      componentDidUpdate () {
+        console.log("B componentDidUpdate");
+      }
+      render () {
+        console.log("B render");
+        return (
+          <div>B 接受到车：{this.props.carName}</div>
+        )
+      }
+    }
+    ReactDOM.render(<Count />, document.getElementById('test')) 
+  </script>
+</body>
+
+</html>
