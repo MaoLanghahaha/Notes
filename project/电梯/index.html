@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>电梯</title>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+  <div id="iesm-screen">
+    <div class="top">
+      <img class="title-do" src="./img/title_do.png" alt="title_do">
+      <h1 class="title">英威腾电梯运维可视化平台</h1>
+    </div>
+    <div class="content">
+      <div class="content-top">
+        <div class="content-top-item item1"></div>
+        <div class="content-top-item item2"></div>
+      </div>
+      <div class="content-bottom">
+        <div class="content-bottom-item item-left">
+          <div class="item-block item-left-top realtime-monitoring">
+            <div class="sub-title">
+              <img class="sub-title-do1" src="./img/sub_title_do1.png" alt="sub_title_do1" srcset="">
+              <img class="sub-title-do2" src="./img/sub_title_do2.png" alt="sub_title_do2" srcset="">
+              <div class="sub-title-display">
+                <div class="sub-title-text">实时监控</div>
+                <div class="sub-title-option">
+                  <input type="text" name="" placeholder="请输入" />
+                  <img src="./img/search.png" alt="search" srcset="">
+                </div>
+              </div>
+            </div>
+            <div class="sub-content">
+              <div class="table">
+                <div class="row head-row">
+                  <div class="col address-col">电梯地址</div>
+                  <div class="col option-col">操作</div>
+                </div>
+                <div class="row content-row">
+                  <div class="col address-col">
+                    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                  <div class="col option-col">
+                    <img src="./img/play.png" alt="play" srcset="">
+                    <img src="./img/data.png" alt="data" srcset="">
+                  </div>
+                </div>
+                <div class="row content-row">
+                  <div class="col address-col">XXXXXX</div>
+                  <div class="col option-col">
+                    <img src="./img/play.png" alt="play" srcset="">
+                    <img src="./img/data.png" alt="data" srcset="">
+                  </div>
+                </div>
+                <div class="row content-row">
+                  <div class="col address-col">XXXXXX</div>
+                  <div class="col option-col">
+                    <img src="./img/play.png" alt="play" srcset="">
+                    <img src="./img/data.png" alt="data" srcset="">
+                  </div>
+                </div>
+                <div class="row content-row">
+                  <div class="col address-col">XXXXXX</div>
+                  <div class="col option-col">
+                    <img src="./img/play.png" alt="play" srcset="">
+                    <img src="./img/data.png" alt="data" srcset="">
+                  </div>
+                </div>
+                <div class="row content-row">
+                  <div class="col address-col">XXXXXX</div>
+                  <div class="col option-col">
+                    <img src="./img/play.png" alt="play" srcset="">
+                    <img src="./img/data.png" alt="data" srcset="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item-block item-left-bottom map-distribution">
+            <div class="sub-title">
+              <img class="sub-title-do1" src="./img/sub_title_do1.png" alt="sub_title_do1" srcset="">
+              <img class="sub-title-do2" src="./img/sub_title_do2.png" alt="sub_title_do2" srcset="">
+              <div class="sub-title-display">
+                <div class="sub-title-text">地图分布</div>
+                <div class="sub-title-option"></div>
+              </div>
+            </div>
+            <div class="sub-content">
+              <div id="map-distribution-chart" style="margin-left: 75px;width: 100%;height:95%;"></div>
+              <div class="map-data-sphere">
+                <!-- <img class="sphere-do" src="./img/circle_do.png" alt="circle_do" srcset=""> -->
+                <div class="sphere-data">
+                  <div class="label">电梯总数</div>
+                  <div class="value">3306</div>
+                </div>
+              </div>
+              <div class="map-chart-legend"></div>
+              <div class="map-chart-title">
+                <span class="title-icon"></span>
+                <span class="title-label">上海市电梯数量分布</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content-bottom-item item-center">1</div>
+        <div class="content-bottom-item item-right">
+          <div class="item-block item-right-top fault-statistics">
+            <div class="sub-title">
+              <img class="sub-title-do1" src="./img/sub_title_do1.png" alt="sub_title_do1" srcset="">
+              <img class="sub-title-do2" src="./img/sub_title_do2.png" alt="sub_title_do2" srcset="">
+              <div class="sub-title-display">
+                <div class="sub-title-text">故障统计</div>
+                <div class="sub-title-option">
+                  <div class="sub-title-option-item">
+                    <select name="">
+                      <option value="">全市</option>
+                    </select>
+                  </div>
+                  <div class="sub-title-option-item">
+                    <select name="">
+                      <option value="">全部</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="sub-content">
+              <div id="fault-statistics-chart" style="width: 100%;height:100%;"></div>
+            </div>
+          </div>
+          <div class="item-block item-right-center fault-analysis">
+            <div class="sub-title">
+              <img class="sub-title-do1" src="./img/sub_title_do1.png" alt="sub_title_do1" srcset="">
+              <img class="sub-title-do2" src="./img/sub_title_do2.png" alt="sub_title_do2" srcset="">
+              <div class="sub-title-display">
+                <div class="sub-title-text">故障分析</div>
+                <div class="sub-title-option">
+                  <select name="">
+                    <option value="">全市</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="sub-content">11</div>
+          </div>
+          <div class="item-block item-right-bottom realtime-falut">
+            <div class="sub-title">
+              <img class="sub-title-do1" src="./img/sub_title_do1.png" alt="sub_title_do1" srcset="">
+              <img class="sub-title-do2" src="./img/sub_title_do2.png" alt="sub_title_do2" srcset="">
+              <div class="sub-title-display">
+                <div class="sub-title-text">实时故障</div>
+                <div class="sub-title-option">
+                  <select name="">
+                    <option value="">全市</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="sub-content">
+              <div class="table">
+                <div class="row head-row">
+                  <div class="col col-1">序号</div>
+                  <div class="col col-2">故障设备</div>
+                  <div class="col col-3">故障类型</div>
+                </div>
+                <div class="tbody">
+                  <div class="row content-row">
+                    <div class="col col-1">No.1</div>
+                    <div class="col col-2">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                    <div class="col col-3">
+                      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                  </div>
+                  <div class="row content-row">
+                    <div class="col col-1">No.2</div>
+                    <div class="col col-2">XXXXXXXX</div>
+                    <div class="col col-3">XXXXXXXXXXX</div>
+                  </div>
+                  <div class="row content-row">
+                    <div class="col col-1">No.2</div>
+                    <div class="col col-2">XXXXXXXX</div>
+                    <div class="col col-3">XXXXXXXXXXX</div>
+                  </div>
+                  <div class="row content-row">
+                    <div class="col col-1">No.2</div>
+                    <div class="col col-2">XXXXXXXX</div>
+                    <div class="col col-3">XXXXXXXXXXX</div>
+                  </div>
+                  <div class="row content-row">
+                    <div class="col col-1">No.2</div>
+                    <div class="col col-2">XXXXXXXX</div>
+                    <div class="col col-3">XXXXXXXXXXX</div>
+                  </div>
+                  <div class="row content-row">
+                    <div class="col col-1">No.2</div>
+                    <div class="col col-2">XXXXXXXX</div>
+                    <div class="col col-3">XXXXXXXXXXX</div>
+                  </div>
+                  <div class="row content-row">
+                    <div class="col col-1">No.2</div>
+                    <div class="col col-2">XXXXXXXX</div>
+                    <div class="col col-3">XXXXXXXXXXX</div>
+                  </div>
+                  <div class="row content-row">
+                    <div class="col col-1">No.2</div>
+                    <div class="col col-2">XXXXXXXX</div>
+                    <div class="col col-3">XXXXXXXXXXX</div>
+                  </div>
+                  <div class="row content-row">
+                    <div class="col col-1">No.2</div>
+                    <div class="col col-2">XXXXXXXX</div>
+                    <div class="col col-3">XXXXXXXXXXX</div>
+                  </div>
+                  <div class="row content-row">
+                    <div class="col col-1">No.2</div>
+                    <div class="col col-2">XXXXXXXX</div>
+                    <div class="col col-3">XXXXXXXXXXX</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/lib/jquery-2.0.0.min.js"></script>
+  <script src="./js/lib/echarts-5.4.2.min.js"></script>
+  <script src="./js/const.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>
